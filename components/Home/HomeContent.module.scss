@@ -1,0 +1,8 @@
+.HomeContent {
+  width: min(95%, 1440px);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 0.25fr);
+  margin-top: 8rem;
+  gap: 6rem;
+}

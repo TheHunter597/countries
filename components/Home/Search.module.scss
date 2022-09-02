@@ -1,0 +1,136 @@
+@import "../../styles/index.module.scss";
+
+.Search {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 5rem;
+  font-size: $fs-body;
+  width: min(95%, 1440px);
+  margin-inline: auto;
+  &__input {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 1.7rem 2.5rem;
+    width: 35%;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    background-color: var(--element-color) !important;
+    @include makeACard;
+    input {
+      border: none;
+      font-size: $fs-body;
+      height: 100%;
+      outline: none;
+      background-color: var(--element-color);
+      color: var(--primary-text-color);
+      &::placeholder {
+        color: var(--primary-text-color);
+      }
+    }
+    span {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding-right: 1.5rem;
+      font-size: 2.2rem;
+    }
+  }
+  &__select {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 7px 15px rgba(black, 0.1);
+    background-color: var(--element-color);
+    gap: 4rem;
+    padding: 2rem 2.5rem;
+    border-radius: 5px;
+    position: relative;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: $fs-body;
+    min-width: 15%;
+    user-select: none;
+  }
+  &__options {
+    position: absolute;
+    top: 107%;
+    padding: 1.8rem 2.2rem;
+    width: 100%;
+    background-color: var(--element-color) !important;
+    border-radius: 5px;
+    @include makeACard;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+    animation: dropdownAnimation 0.7s ease-out;
+    z-index: 1;
+    span {
+      transition: all 0.4s;
+      &:hover {
+        transform: scale(1.07);
+      }
+    }
+  }
+  &__results {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    background-color: var(--element-color) !important;
+    padding: 2rem;
+    top: 110%;
+    left: 0%;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: $fs-body;
+    @include makeACard;
+    width: 100%;
+    padding-left: 5rem;
+    animation: dropdownAnimation 0.7s ease-out;
+    span {
+      transition: all 0.7s;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      gap: 2rem;
+      img {
+        border-radius: 5px;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+  }
+  &__game {
+    background-color: var(--element-color) !important;
+    font-size: 1.6rem;
+    padding: 0rem 3rem;
+    border-radius: 5px;
+    @include makeACard;
+    cursor: pointer;
+    transition: all 0.7s;
+    color: var(--primary-text-color);
+    &:hover {
+      transform: translateY(-10px);
+    }
+  }
+}
+
+@keyframes dropdownAnimation {
+  0% {
+    opacity: 0;
+    transform: translateY(-20%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

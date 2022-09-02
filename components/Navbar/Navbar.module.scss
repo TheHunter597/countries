@@ -1,0 +1,40 @@
+@import "../../styles/index.module.scss";
+
+.Navbar {
+  box-shadow: 0 7px 15px rgba(black, 0.1);
+  height: 8rem;
+  background-color: var(--element-color);
+  transition: all 0.7s;
+
+  ul {
+    width: min(95%, 1440px);
+    margin-inline: auto;
+    display: flex;
+    flex-direction: row;
+    margin-top: 0;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2rem;
+    font-size: $fs-details;
+    list-style: none;
+    color: var(--primary-text-color);
+    li {
+      cursor: pointer;
+      &:first-child {
+        font-weight: 800;
+        font-size: 2.4rem;
+      }
+      &:last-child {
+        font-size: $fs-body;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: centers;
+        gap: 1rem;
+        span {
+          font-size: 1.6rem;
+        }
+      }
+    }
+  }
+}

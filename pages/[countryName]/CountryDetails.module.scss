@@ -1,0 +1,99 @@
+@import "../../styles/index.module.scss";
+
+.CountryDetails {
+  display: grid;
+  grid-template-columns: 1fr 0.2fr 0.5fr 0.5fr;
+  grid-template-rows: 0.2fr 0.45fr 0.5fr 0.5fr 0.2fr 0.5fr;
+  width: min(95%, 1440px);
+  margin-inline: auto;
+  padding-bottom: 10rem;
+  grid-template-areas:
+    "back . gameTarget gameTarget"
+    ". . . ."
+    "image . title ."
+    "image . info1 info2"
+    "image . . ."
+    "image . info3 info3";
+  &__back {
+    grid-area: back;
+    margin-top: 6.5rem;
+    button {
+      font-size: 1.6rem;
+      background-color: var(--element-color);
+      color: var(--primary-text-color);
+      border: none;
+      padding: 0.8rem 3.5rem;
+      box-shadow: 10px 10px 20px rgba(black, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.7s;
+      &:hover {
+        transform: translateX(-15px);
+      }
+      span {
+        padding-right: 1rem;
+        font-size: 2.2rem;
+      }
+    }
+  }
+  &__gameTarget {
+    grid-area: gameTarget;
+    margin-top: 6.5rem;
+    h4 {
+      font-size: 2.5rem !important;
+      background-color: $primary-red;
+      padding: 0.6rem 2rem;
+      border-radius: 10px;
+      color: var(--primary-text-color);
+    }
+  }
+  &__image {
+    grid-area: image;
+  }
+  h4 {
+    font-size: 1.6rem;
+    font-weight: 600;
+    display: inline;
+  }
+  span {
+    font-size: 1.4rem;
+    display: inline-block;
+  }
+  &__title {
+    grid-area: title;
+    font-size: 3rem;
+  }
+  &__Info1 {
+    grid-area: info1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  &__Info2 {
+    grid-area: info2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  &__Info3 {
+    grid-area: info3;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__border {
+    display: grid;
+    grid-template-columns: repeat(3, 0.33fr);
+    gap: 1rem;
+    margin-left: 1rem;
+    span {
+      @include makeACard;
+      padding: 0.4rem 2rem;
+      cursor: pointer;
+      background-color: var(--element-color);
+    }
+  }
+}

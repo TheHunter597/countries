@@ -1,0 +1,31 @@
+@import "../../styles/index.module.scss";
+
+.CountryCard {
+  @include makeACard;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: var(--element-color);
+  img {
+    border-radius: 5px 5px 0 0;
+  }
+  &__info {
+    padding: 2rem;
+    padding-top: 0.5rem;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 1rem;
+    h3 {
+      font-size: $fs-details;
+    }
+    span {
+      font-size: $fs-body;
+      font-weight: 800;
+      span {
+        font-weight: 300;
+      }
+    }
+  }
+}

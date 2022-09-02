@@ -1,0 +1,32 @@
+$fs-body: 1.4rem;
+$fs-details: 2rem;
+
+$dark-blue: hsl(209, 23%, 22%);
+$very-dark-blue-dark-mode: hsl(207, 26%, 17%);
+$very-dark-blue-light-mode: hsl(200, 15%, 8%);
+$dark-gray: hsl(0, 0%, 52%);
+$very-light-gray: hsl(0, 0%, 98%);
+$primary-red: hsl(12, 88%, 59%);
+.light {
+  --primary-text-color: #{$very-dark-blue-light-mode};
+  --bg-color: #{$very-light-gray};
+  --input-color: #{$dark-gray};
+  --element-color: white;
+  background-color: var(--bg-color);
+  color: var(--primary-text-color);
+  transition: all 0.7s;
+}
+.dark {
+  --primary-text-color: white;
+  --bg-color: #{$very-dark-blue-dark-mode};
+  --input-color: #{$dark-blue};
+  --element-color: #{$dark-blue};
+  background-color: var(--bg-color);
+  color: var(--primary-text-color);
+  transition: all 0.7s;
+}
+
+@mixin makeACard {
+  box-shadow: 0 7px 15px rgba(black, 0.1);
+  background-color: white;
+}
