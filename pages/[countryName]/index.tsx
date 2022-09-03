@@ -25,7 +25,7 @@ function CountryDetails(props: props) {
     countriesDataType[]
   >([]);
   useEffect(() => {
-    dispatch({ type: actionTypes.CHANGE_CURRENT_COUNTRY, value: data !=undefined?data:"" });
+    dispatch({ type: actionTypes.CHANGE_CURRENT_COUNTRY, value: data !=null?data:"" });
     if (
       state.game.isActive &&
       state.game.targetCountry.name.common === data[0].name.common
@@ -34,7 +34,7 @@ function CountryDetails(props: props) {
       router.push("/game");
     }
   }, [data, dispatch]);
-  const {borders} = data !=undefined ?data[0]:{borders:["",""]}
+  const {borders} = data !=null ?data[0]:{borders:["",""]}
   useEffect(() => {
       setBorderCountriesData([]);
       async function getBorderCountries() {
@@ -43,7 +43,7 @@ function CountryDetails(props: props) {
       }
       getBorderCountries();
   }, [borders]);
-  if(data === undefined){
+  if(data === null){
     console.log("data is undefiend");
     
     return <div>Country data isnt avaliable</div>
@@ -206,7 +206,7 @@ export async function getStaticProps(context: {
   ){
     return {
       props:{
-        data:undefined
+        data:null
       }
     }
   }else{
