@@ -11,19 +11,30 @@ import {
 import { useRouter } from "next/router";
 import fetchCountriesByRegion from "../../data/fetchCountriesByRegion";
 import randomInteger from "random-int";
-import { stat } from "fs";
+import Head from "next/head";
 function Game() {
   const contextState = useContext(context);
-  const { state, dispatch } = contextState as contextType;
+  const { state, dispatch, resetGame } = contextState as contextType;
   const router = useRouter();
   const [timeToStart, setTimeToStart] = useState(15);
   async function startGame() {
     const gameRegion: { data: countriesDataType[] } =
       await fetchCountriesByRegion(state.regions[randomInteger(0, 3)]);
     const { data } = gameRegion;
-    const startCountry: countriesDataType = data[randomInteger(0, data.length)];
-    const targetCountry: countriesDataType =
-      data[randomInteger(0, data.length)];
+    let startRandomIntger = randomInteger(0, data.length);
+    let targetRandomInteger = randomInteger(0, data.length);
+    let startCountry: countriesDataType = data[startRandomIntger];
+    let targetCountry: countriesDataType = data[targetRandomInteger];
+    while (
+      !startCountry.borders ||
+      startCountry.borders.length < 2 ||
+      startCountry.name.common === targetCountry.name.common
+    ) {
+      startCountry = data[Math.floor(Math.random() * data.length)];
+    }
+    while (!targetCountry.borders || targetCountry.borders.length < 2) {
+      targetCountry = data[Math.floor(Math.random() * data.length)];
+    }
     dispatch({ type: actionTypes.CHANGE_ACTIVE_GAME, value: true });
     dispatch({
       type: actionTypes.CHANGE_GAME_REGION_COUNTRIES,
@@ -46,27 +57,17 @@ function Game() {
       clearInterval(timer);
     }, 15000);
   }
-  async function resetGame() {
-    dispatch({
-      type: actionTypes.CHANGE_GAME_REGION_COUNTRIES,
-      value: [],
-    });
-    dispatch({
-      type: actionTypes.CHANGE_START_COUNTRY,
-      value: {},
-    });
-    dispatch({
-      type: actionTypes.CHANGE_TARGET_COUNTRY,
-      value: {},
-    });
-    dispatch({ type: actionTypes.CHANGE_DONE_SUCCESSFULLY, value: false });
-    dispatch({ type: actionTypes.REST_TIME_TAKEN });
+  async function resetGameTimer() {
     setTimeToStart(15);
-    dispatch({ type: actionTypes.CHANGE_ACTIVE_GAME, value: false });
   }
-
+  useEffect(() => {
+    setTimeToStart(15);
+  }, []);
   return (
     <div className={styles.Game}>
+      <Head>
+        <title>Play A Game</title>
+      </Head>
       {!state.game.Sucess ? (
         <>
           <h3 className={styles.Game__title}>What is the game</h3>
@@ -132,7 +133,14 @@ function Game() {
         <div className={styles.Game__sucess}>
           <h2>Congratulation you have done it</h2>
           <div>
-            <button onClick={resetGame}>Retry</button>
+            <button
+              onClick={() => {
+                resetGame();
+                resetGameTimer();
+              }}
+            >
+              Retry
+            </button>
           </div>
         </div>
       )}

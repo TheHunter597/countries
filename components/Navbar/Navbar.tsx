@@ -10,12 +10,11 @@ interface props {
 function Navbar(props: props) {
   const { darkMode, setDarkMode } = props;
   const router = useRouter();
-  console.log(darkMode);
 
   return (
     <nav className={styles.Navbar}>
       <ul>
-        <li onClick={() => router.push("/")}>Where in the world ?</li>
+        <li>Where in the world ?</li>
         <li onClick={() => setDarkMode((prev: boolean) => !prev)}>
           <span>{darkMode ? <BsMoonFill /> : <BsMoon />}</span>Dark mode
         </li>

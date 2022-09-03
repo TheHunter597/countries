@@ -49,4 +49,5 @@ export interface contextType {
   dispatch: ({ type, value }: { type: actionTypes; value?: any }) => void;
   changeCurrentCountry: (country: countriesDataType) => void;
   controlTimeTakenCounting: () => void;
+  resetGame: () => void;
 }

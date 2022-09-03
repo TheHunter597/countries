@@ -65,6 +65,7 @@ export function ContextProvider(props: props) {
     },
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
 
   const router = useRouter();
   function changeCurrentCountry(country: countriesDataType) {
@@ -75,12 +76,30 @@ export function ContextProvider(props: props) {
     });
   }
 
+  function resetGame() {
+    dispatch({
+      type: actionTypes.CHANGE_GAME_REGION_COUNTRIES,
+      value: [],
+    });
+    dispatch({
+      type: actionTypes.CHANGE_START_COUNTRY,
+      value: {},
+    });
+    dispatch({
+      type: actionTypes.CHANGE_TARGET_COUNTRY,
+      value: {},
+    });
+    dispatch({ type: actionTypes.CHANGE_DONE_SUCCESSFULLY, value: false });
+    dispatch({ type: actionTypes.CHANGE_ACTIVE_GAME, value: false });
+  }
+
   return (
     <context.Provider
       value={{
         state,
         dispatch,
         changeCurrentCountry,
+        resetGame,
       }}
     >
       {props.children}

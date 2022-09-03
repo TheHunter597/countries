@@ -11,6 +11,7 @@ import {
 import context from "../../context/context";
 import { useRouter } from "next/router";
 import fetchCountryByCode from "../../data/fetchCountryByCode";
+import Head from "next/head";
 interface props {
   data: countriesDataType[];
 }
@@ -18,7 +19,7 @@ interface props {
 function CountryDetails(props: props) {
   const { data } = props;
   const contextState = useContext(context);
-  const { dispatch, state } = contextState as contextType;
+  const { dispatch, state, resetGame } = contextState as contextType;
   const router = useRouter();
 
   const [borderCountriesData, setBorderCountriesData] = useState<
@@ -38,7 +39,9 @@ function CountryDetails(props: props) {
   useEffect(() => {
     setBorderCountriesData([]);
     async function getBorderCountries(borders: string[]) {
-      const data = await fetchCountryByCode(borders.join());
+      const data = await fetchCountryByCode(
+        borders.length >= 1 ? borders.join() : ""
+      );
 
       setBorderCountriesData(data);
     }
@@ -88,8 +91,16 @@ function CountryDetails(props: props) {
 
     return (
       <div className={styles.CountryDetails}>
+        <Head>
+          <title>{common}</title>
+        </Head>
         <div className={styles.CountryDetails__back}>
-          <button onClick={() => router.push("/")}>
+          <button
+            onClick={() => {
+              router.push("/");
+              resetGame();
+            }}
+          >
             <span>&larr;</span>Back
           </button>
         </div>
