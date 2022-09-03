@@ -14,8 +14,7 @@ import randomInteger from "random-int";
 import { stat } from "fs";
 function Game() {
   const contextState = useContext(context);
-  const { state, dispatch, controlTimeTakenCounting } =
-    contextState as contextType;
+  const { state, dispatch } = contextState as contextType;
   const router = useRouter();
   const [timeToStart, setTimeToStart] = useState(15);
   async function startGame() {
@@ -43,7 +42,7 @@ function Game() {
       setTimeToStart((prev) => (prev -= 1));
     }, 1000);
     setTimeout(() => {
-      router.push(`/${startCountry.name.common}`);
+      router.push(`/${startCountry.name.common.toLocaleLowerCase()}`);
       clearInterval(timer);
     }, 15000);
   }
@@ -80,22 +79,13 @@ function Game() {
             You can navigate between countries via the border countries in the
             lower part of the page
           </p>
-          <div>
-            {state.game.isActive ? (
-              <p className={styles.Game__details}>
-                you should get from {state.game.startCountry.name.common} to{" "}
-                {state.game.targetCountry.name.common}
-              </p>
-            ) : (
-              ""
-            )}
-          </div>
+          <div></div>
           <div className={styles.Game__image}>
             {!state.game.isActive ? (
               <Image
                 src={countrtBorderImage}
                 width={1000}
-                height={450}
+                height={550}
                 alt="clarification Image"
               />
             ) : (
@@ -122,6 +112,14 @@ function Game() {
               </>
             )}
           </div>
+          {state.game.isActive ? (
+            <p className={styles.Game__details}>
+              you should get from {state.game.startCountry.name.common} to{" "}
+              {state.game.targetCountry.name.common}
+            </p>
+          ) : (
+            ""
+          )}
           <div className={styles.Game__confirm}>
             {!state.game.isActive ? (
               <button onClick={startGame}>Lets do it</button>

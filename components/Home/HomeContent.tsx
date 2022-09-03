@@ -13,7 +13,7 @@ interface props {
 }
 function HomeContent(props: props) {
   const contextState = useContext(context);
-  const { state, dispatch } = contextState as contextType;
+  const { state } = contextState as contextType;
   const { allCountriesData } = props;
   let CountriesDisplayedAtHomePage =
     state.countriesByRegion.length > 2

@@ -43,10 +43,16 @@
     align-items: center;
     margin-top: 6rem;
     gap: 6rem;
+    @media (max-width: 700px) {
+      gap: 2rem;
+    }
     span {
       font-size: 6rem;
       color: var(--primary-text-color);
       padding-bottom: 10rem;
+      @media (max-width: 700px) {
+        font-size: 4rem;
+      }
     }
     div {
       display: flex;
@@ -86,9 +92,13 @@
   &__sucess {
     max-width: 800px;
     margin-inline: auto;
+    margin-top: 10rem;
     h2 {
       font-size: 8rem;
       text-align: center;
+      @media (max-width: 800px) {
+        font-size: 3.5rem;
+      }
     }
     div {
       text-align: center;
@@ -101,6 +111,10 @@
         border-radius: 10px;
         transition: all 1s;
         cursor: pointer;
+        @media (max-width: 800px) {
+          font-size: 1.8rem;
+          padding: 0.8rem 2.4rem;
+        }
         &:hover {
           transform: translateY(-10px);
         }

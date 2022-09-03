@@ -5,7 +5,6 @@
   height: 8rem;
   background-color: var(--element-color);
   transition: all 0.7s;
-
   ul {
     width: min(95%, 1440px);
     margin-inline: auto;
@@ -18,11 +17,16 @@
     font-size: $fs-details;
     list-style: none;
     color: var(--primary-text-color);
+    margin-bottom: 0;
+    height: 100%;
     li {
       cursor: pointer;
       &:first-child {
         font-weight: 800;
         font-size: 2.4rem;
+        @media (max-width: 600px) {
+          font-size: 1.8rem;
+        }
       }
       &:last-child {
         font-size: $fs-body;
