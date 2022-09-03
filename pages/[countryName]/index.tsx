@@ -34,7 +34,6 @@ function CountryDetails(props: props) {
       router.push("/game");
     }
   }, [data, dispatch]);
-  console.log(borderCountriesData);
 
   const {
     name: { nativeName, common },
@@ -49,10 +48,11 @@ function CountryDetails(props: props) {
     languages,
     borders,
   } = data[0];
+  data[0] === undefined ? console.log("unde") : "here";
 
-  let Allcurrencies: any = Object.values(currencies);
-  let AllLanguages: any = Object.values(languages);
-  let AllnativeName: any = Object.values(nativeName);
+  let Allcurrencies: any = currencies ? Object.values(currencies) : "";
+  let AllLanguages: any = languages ? Object.values(languages) : "";
+  let AllnativeName: any = nativeName ? Object.values(nativeName) : "";
 
   const borderCountries = borderCountriesData.map((country) => {
     return (
@@ -147,7 +147,28 @@ function CountryDetails(props: props) {
 
 export async function getStaticPaths() {
   const AllData = (await fetchCountriesData()) || [];
+  const countriesWithNoDataBase = [
+    "Bouvet island",
+    "Antarctica",
+    "Macau",
+    "Heard Island and McDonald Islands",
+    "kosovo",
+    "Réunion",
+    "Curaçao",
+    "São Tomé and Príncipe",
+    "Åland Islands",
+    "saint barthélemy",
+  ];
+
   const paths = AllData.data.map((country) => {
+    if (
+      countriesWithNoDataBase.some(
+        (name) =>
+          name.toLocaleLowerCase() === country.name.common.toLocaleLowerCase()
+      )
+    ) {
+      return;
+    }
     return {
       params: {
         countryName: country.name.common.toLocaleLowerCase(),
