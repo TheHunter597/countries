@@ -202,7 +202,7 @@ export async function getStaticProps(context: {
   if (
     countriesWithNoDataBase.some(
       (name) =>
-        name.toLocaleLowerCase() === data.data.name.common.toLocaleLowerCase()
+        name.toLocaleLowerCase() === data.data[0].name.common.toLocaleLowerCase()
     )
   ){
     return {
