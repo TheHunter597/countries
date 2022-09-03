@@ -25,7 +25,7 @@ function CountryDetails(props: props) {
     countriesDataType[]
   >([]);
   useEffect(() => {
-    dispatch({ type: actionTypes.CHANGE_CURRENT_COUNTRY, value: data });
+    dispatch({ type: actionTypes.CHANGE_CURRENT_COUNTRY, value: data !=undefined?data:"" });
     if (
       state.game.isActive &&
       state.game.targetCountry.name.common === data[0].name.common
@@ -44,6 +44,8 @@ function CountryDetails(props: props) {
       getBorderCountries();
   }, [borders]);
   if(data === undefined){
+    console.log("data is undefiend");
+    
     return <div>Country data isnt avaliable</div>
   }
   const {
@@ -196,13 +198,10 @@ export async function getStaticProps(context: {
     "Åland Islands",
     "saint barthélemy",
   ];
-  const data = await fetchChosenCountryData(
-    context.params.countryName.toLocaleLowerCase()
-  );
   if (
     countriesWithNoDataBase.some(
       (name) =>
-        name.toLocaleLowerCase() === data.data[0].name.common.toLocaleLowerCase()
+      context.params.countryName.toLocaleLowerCase() === name.toLocaleLowerCase()
     )
   ){
     return {
@@ -211,6 +210,9 @@ export async function getStaticProps(context: {
       }
     }
   }else{
+    const data = await fetchChosenCountryData(
+      context.params.countryName.toLocaleLowerCase()
+    );
   return {
     props: {
       data: data.data,
