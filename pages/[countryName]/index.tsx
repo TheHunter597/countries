@@ -34,7 +34,18 @@ function CountryDetails(props: props) {
       router.push("/game");
     }
   }, [data, dispatch]);
-
+  const {borders} = data[0].borders ?data[0]:{borders:[""]}
+  useEffect(() => {
+    setBorderCountriesData([]);
+    async function getBorderCountries() {
+      const data = await fetchCountryByCode(borders.length>=1?borders.join():"");
+      setBorderCountriesData(data);
+    }
+    getBorderCountries();
+  }, [borders]);
+  if(data[0] === undefined){
+    return 
+  }
   const {
     name: { nativeName, common },
     population,
@@ -46,11 +57,7 @@ function CountryDetails(props: props) {
     capital,
     flags: { png },
     languages,
-    borders,
   } = data[0];
-  if(data[0] === undefined){
-    return 
-  }
 
   let Allcurrencies: any =  Object.values(currencies) ;
   let AllLanguages: any =  Object.values(languages) ;
