@@ -74,17 +74,7 @@ function CountryDetails(props: props) {
         {country.name.common}
       </span>
     );
-  });
-
-  useEffect(() => {
-    setBorderCountriesData([]);
-    async function getBorderCountries() {
-      const data = await fetchCountryByCode(borders.join());
-
-      setBorderCountriesData(data);
-    }
-    getBorderCountries();
-  }, [borders]);
+  })
 
   return (
     <div className={styles.CountryDetails}>
