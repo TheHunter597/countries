@@ -5,4 +5,22 @@
   grid-template-columns: repeat(4, 0.25fr);
   margin-top: 8rem;
   gap: 6rem;
+  @media (max-width: 1000px) {
+    width: min(95%, 950px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 0.33fr);
+  }
+  @media (max-width: 700px) {
+    width: min(95%, 950px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(2, 0.5fr);
+  }
+  @media (max-width: 450px) {
+    width: min(80%, 950px);
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
 }

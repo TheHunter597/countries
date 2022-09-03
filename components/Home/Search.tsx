@@ -39,13 +39,13 @@ function Search() {
     dispatch({ type: actionTypes.CHANGE_CURRENT_CHOSEN_REGION, value: region });
   }
 
-  const dropdownElements = countriesData.map((country) => {
+  const dropdownElements = countriesData.slice(0, 15).map((country) => {
     return (
       <span
         key={country.population}
         onClick={() => {
           changeCurrentCountry(country);
-          router.push(`/${country.name.common}`);
+          router.push(`/${country.name.common.toLocaleLowerCase()}`);
         }}
       >
         <Image src={country.flags.png} width={60} height={40} alt="flag" />
@@ -75,8 +75,8 @@ function Search() {
           ""
         )}
       </div>
-      <div className={styles.Search__game}>
-        <h4 onClick={() => router.push("/game")}>Play a Game</h4>
+      <div className={styles.Search__game} onClick={() => router.push("/game")}>
+        <h4>Play a Game</h4>
       </div>
       <div
         className={styles.Search__select}

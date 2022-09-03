@@ -8,7 +8,7 @@ interface props {
 }
 
 function Layout(props: props) {
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   return (
     <ContextProvider>
       <div className={darkMode ? styles.dark : styles.light}>

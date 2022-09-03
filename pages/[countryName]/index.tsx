@@ -20,7 +20,6 @@ function CountryDetails(props: props) {
   const contextState = useContext(context);
   const { dispatch, state } = contextState as contextType;
   const router = useRouter();
-  console.log(data);
 
   const [borderCountriesData, setBorderCountriesData] = useState<
     countriesDataType[]
@@ -35,6 +34,7 @@ function CountryDetails(props: props) {
       router.push("/game");
     }
   }, [data, dispatch]);
+  console.log(borderCountriesData);
 
   const {
     name: { nativeName, common },
@@ -53,20 +53,28 @@ function CountryDetails(props: props) {
   let Allcurrencies: any = Object.values(currencies);
   let AllLanguages: any = Object.values(languages);
   let AllnativeName: any = Object.values(nativeName);
+
+  const borderCountries = borderCountriesData.map((country) => {
+    return (
+      <span
+        key={country.tld}
+        onClick={() =>
+          router.push(`/${country.name.common.toLocaleLowerCase()}`)
+        }
+      >
+        {country.name.common}
+      </span>
+    );
+  });
+
   useEffect(() => {
     setBorderCountriesData([]);
-    const arr: countriesDataType[] = [];
-    async function getBorderCountriesData() {
-      borders.forEach(async (code) => {
-        const data = await fetchCountryByCode(code);
-        setBorderCountriesData((prev) =>
-          prev.some((country) => country.name.common === data[0].name.common)
-            ? prev
-            : [...prev, data[0]]
-        );
-      });
+    async function getBorderCountries() {
+      const data = await fetchCountryByCode(borders.join());
+
+      setBorderCountriesData(data);
     }
-    getBorderCountriesData();
+    getBorderCountries();
   }, [borders]);
 
   return (
@@ -78,7 +86,10 @@ function CountryDetails(props: props) {
       </div>
       {state.game.isActive ? (
         <div className={styles.CountryDetails__gameTarget}>
-          <h4>your target &rarr; {state.game.targetCountry.name.common}</h4>
+          <h4>
+            target &rarr;
+            {state.game.targetCountry.name.common}
+          </h4>
         </div>
       ) : (
         " "
@@ -128,22 +139,7 @@ function CountryDetails(props: props) {
       </div>
       <div className={styles.CountryDetails__Info3}>
         <h4>Border Countries: </h4>
-        <div className={styles.CountryDetails__border}>
-          {borderCountriesData.map((country, index) => {
-            return country.borders[index] != undefined ? (
-              <span
-                key={country.borders[index] + "mo"}
-                onClick={() =>
-                  router.push(`/${country.name.common.toLocaleLowerCase()}`)
-                }
-              >
-                {country.name.common}
-              </span>
-            ) : (
-              ""
-            );
-          })}
-        </div>
+        <div className={styles.CountryDetails__border}>{borderCountries}</div>
       </div>
     </div>
   );
@@ -160,7 +156,7 @@ export async function getStaticPaths() {
   });
 
   return {
-    fallback: true,
+    fallback: false,
     paths: paths,
   };
 }
@@ -168,7 +164,9 @@ export async function getStaticPaths() {
 export async function getStaticProps(context: {
   params: { countryName: string };
 }) {
-  const data = await fetchChosenCountryData(context.params.countryName);
+  const data = await fetchChosenCountryData(
+    context.params.countryName.toLocaleLowerCase()
+  );
   return {
     props: {
       data: data.data,

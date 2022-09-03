@@ -9,6 +9,15 @@
   font-size: $fs-body;
   width: min(95%, 1440px);
   margin-inline: auto;
+  @media (max-width: 600px) {
+    display: grid;
+    grid-template-columns: 0.55fr 0.45fr;
+    grid-template-rows: 0.3fr 60px 0.3fr;
+    grid-template-areas:
+      "search search"
+      " . . "
+      "region game";
+  }
   &__input {
     display: flex;
     flex-direction: row;
@@ -21,6 +30,10 @@
     cursor: pointer;
     background-color: var(--element-color) !important;
     @include makeACard;
+    @media (max-width: 600px) {
+      grid-area: search;
+      width: 100%;
+    }
     input {
       border: none;
       font-size: $fs-body;
@@ -56,6 +69,10 @@
     font-size: $fs-body;
     min-width: 15%;
     user-select: none;
+    @media (max-width: 600px) {
+      grid-area: region;
+      gap: 1rem;
+    }
   }
   &__options {
     position: absolute;
@@ -111,13 +128,20 @@
   }
   &__game {
     background-color: var(--element-color) !important;
-    font-size: 1.6rem;
+    font-size: $fs-body;
     padding: 0rem 3rem;
+    text-align: center;
+    margin-inline: auto;
     border-radius: 5px;
     @include makeACard;
     cursor: pointer;
-    transition: all 0.7s;
+    transition: all 0.5s;
     color: var(--primary-text-color);
+    @media (max-width: 600px) {
+      grid-area: game;
+      width: 85%;
+      padding: 0.15rem 1.5rem;
+    }
     &:hover {
       transform: translateY(-10px);
     }
