@@ -48,11 +48,13 @@ function CountryDetails(props: props) {
     languages,
     borders,
   } = data[0];
-  data[0] === undefined ? console.log("unde") : "here";
+  if(data[0] === undefined){
+    return 
+  }
 
-  let Allcurrencies: any = currencies ? Object.values(currencies) : "";
-  let AllLanguages: any = languages ? Object.values(languages) : "";
-  let AllnativeName: any = nativeName ? Object.values(nativeName) : "";
+  let Allcurrencies: any =  Object.values(currencies) ;
+  let AllLanguages: any =  Object.values(languages) ;
+  let AllnativeName: any = Object.values(nativeName) ;
 
   const borderCountries = borderCountriesData.map((country) => {
     return (
@@ -168,12 +170,12 @@ export async function getStaticPaths() {
       )
     ) {
       return;
-    }
+    }else{
     return {
       params: {
         countryName: country.name.common.toLocaleLowerCase(),
       },
-    };
+    }};
   });
 
   return {
