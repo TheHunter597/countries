@@ -34,17 +34,17 @@ function CountryDetails(props: props) {
       router.push("/game");
     }
   }, [data, dispatch]);
-  const {borders} = data[0].borders ?data[0]:{borders:[""]}
+  const {borders} = data !=undefined ?data[0]:{borders:["",""]}
   useEffect(() => {
-    setBorderCountriesData([]);
-    async function getBorderCountries() {
-      const data = await fetchCountryByCode(borders.length>=1?borders.join():"");
-      setBorderCountriesData(data);
-    }
-    getBorderCountries();
+      setBorderCountriesData([]);
+      async function getBorderCountries() {
+        const data = await fetchCountryByCode(borders.length>=1?borders.join():"");
+        setBorderCountriesData(data);
+      }
+      getBorderCountries();
   }, [borders]);
-  if(data[0] === undefined){
-    return 
+  if(data === undefined){
+    return <div>Country data isnt avaliable</div>
   }
   const {
     name: { nativeName, common },
@@ -146,6 +146,44 @@ function CountryDetails(props: props) {
 
 export async function getStaticPaths() {
   const AllData = (await fetchCountriesData()) || [];
+  // const countriesWithNoDataBase = [
+  //   "Bouvet island",
+  //   "Antarctica",
+  //   "Macau",
+  //   "Heard Island and McDonald Islands",
+  //   "kosovo",
+  //   "Réunion",
+  //   "Curaçao",
+  //   "São Tomé and Príncipe",
+  //   "Åland Islands",
+  //   "saint barthélemy",
+  // ];
+
+  const paths = AllData.data.map((country) => {
+    // if (
+    //   countriesWithNoDataBase.some(
+    //     (name) =>
+    //       name.toLocaleLowerCase() === country.name.common.toLocaleLowerCase()
+    //   )
+    // ) {
+    //   return
+    // }else{
+    return {
+      params: {
+        countryName: country.name.common.toLocaleLowerCase(),
+      },
+    };
+  });
+
+  return {
+    fallback: false,
+    paths: paths,
+  };
+}
+
+export async function getStaticProps(context: {
+  params: { countryName: string };
+}) {
   const countriesWithNoDataBase = [
     "Bouvet island",
     "Antarctica",
@@ -158,40 +196,26 @@ export async function getStaticPaths() {
     "Åland Islands",
     "saint barthélemy",
   ];
-
-  const paths = AllData.data.map((country) => {
-    if (
-      countriesWithNoDataBase.some(
-        (name) =>
-          name.toLocaleLowerCase() === country.name.common.toLocaleLowerCase()
-      )
-    ) {
-      return;
-    }else{
-    return {
-      params: {
-        countryName: country.name.common.toLocaleLowerCase(),
-      },
-    }};
-  });
-
-  return {
-    fallback: false,
-    paths: paths,
-  };
-}
-
-export async function getStaticProps(context: {
-  params: { countryName: string };
-}) {
   const data = await fetchChosenCountryData(
     context.params.countryName.toLocaleLowerCase()
   );
+  if (
+    countriesWithNoDataBase.some(
+      (name) =>
+        name.toLocaleLowerCase() === data.data.name.common.toLocaleLowerCase()
+    )
+  ){
+    return {
+      props:{
+        data:undefined
+      }
+    }
+  }else{
   return {
     props: {
       data: data.data,
     },
-  };
+  }};
 }
 
 export default CountryDetails;
