@@ -54,13 +54,13 @@ function Search() {
     );
   });
   return (
-    <div
-      className={styles.Search}
-      onClick={() => {
-        input.current?.focus();
-      }}
-    >
-      <div className={styles.Search__input}>
+    <div className={styles.Search}>
+      <div
+        className={styles.Search__input}
+        onClick={() => {
+          input.current?.focus();
+        }}
+      >
         <span>
           <AiOutlineSearch />
         </span>

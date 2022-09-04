@@ -5,120 +5,37 @@
   margin-inline: auto;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 0.1fr 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.5fr 0.25fr;
+  grid-template-rows: 0.2fr 0.6fr;
   grid-template-areas:
-    " . "
-    " title "
-    " info1 "
-    " info2 "
-    " image "
-    " details "
-    " confirm ";
+    " back "
+    " content ";
   color: var(--primary-text-color);
-  p {
-    font-size: 2rem;
-    margin-inline: auto;
-    max-width: 700px;
-    text-align: center;
-  }
-  &__title {
-    grid-area: title;
-    font-size: 4rem;
-    margin-inline: auto;
-  }
-  &__info1 {
-    grid-area: info1;
-  }
-  &__info2 {
-    grid-area: info2;
-  }
-  &__details {
-    grid-area: details;
-  }
-  &__image {
-    grid-area: image;
-    margin-inline: auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 6rem;
-    gap: 6rem;
-    @media (max-width: 700px) {
-      gap: 2rem;
-    }
-    span {
-      font-size: 6rem;
-      color: var(--primary-text-color);
-      padding-bottom: 10rem;
-      @media (max-width: 700px) {
-        font-size: 4rem;
-      }
-    }
-    div {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-      h4 {
-        font-size: 2.4rem;
-        color: var(--primary-text-color);
-        text-align: center;
-      }
-    }
-  }
-  &__confirm {
-    grid-area: confirm;
-    margin-inline: auto;
-    margin-top: 5rem;
+  &__back {
+    margin-top: 8rem;
+    margin-left: 3rem;
+    grid-area: back;
     button {
-      @include makeACard;
-      padding: 0.8rem 3rem;
-      font-size: 2rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      background-color: $primary-red;
+      font-size: 1.6rem;
+      background-color: var(--element-color);
       color: var(--primary-text-color);
+      border: none;
+      padding: 1.5rem 3.5rem;
+      box-shadow: 10px 10px 20px rgba(black, 0.2);
+      border-radius: 8px;
+      cursor: pointer;
       transition: all 0.7s;
       &:hover {
-        transform: translateY(-10px);
-        box-shadow: 10px 20px 30px rgab(black, 0.3);
+        transform: translateX(-15px);
+      }
+      span {
+        padding-right: 1rem;
+        font-size: 2.2rem;
       }
     }
   }
-  &__countDown {
-    font-size: 5rem;
-    color: var(--primary-text-color);
-  }
-  &__sucess {
-    max-width: 800px;
-    margin-inline: auto;
-    margin-top: 10rem;
-    h2 {
-      font-size: 8rem;
-      text-align: center;
-      @media (max-width: 800px) {
-        font-size: 3.5rem;
-      }
-    }
-    div {
-      text-align: center;
-      button {
-        font-size: 3rem;
-        padding: 1rem 3rem;
-        color: var(--primary-text-color);
-        border: none;
-        background-color: $primary-red;
-        border-radius: 10px;
-        transition: all 1s;
-        cursor: pointer;
-        @media (max-width: 800px) {
-          font-size: 1.8rem;
-          padding: 0.8rem 2.4rem;
-        }
-        &:hover {
-          transform: translateY(-10px);
-        }
-      }
+  section {
+    &:first-child {
+      grid-area: content;
     }
   }
 }

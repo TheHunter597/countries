@@ -37,7 +37,7 @@
       background-color: var(--element-color);
       color: var(--primary-text-color);
       border: none;
-      padding: 0.8rem 3.5rem;
+      padding: 0.6rem 3.5rem;
       box-shadow: 10px 10px 20px rgba(black, 0.2);
       border-radius: 8px;
       cursor: pointer;
@@ -126,6 +126,10 @@
     margin-left: 1rem;
     @media (max-width: 700px) {
       margin-left: 0;
+    }
+    @media (max-width: 350px) {
+      margin-inline: auto;
+      grid-template-columns: repeat(2, 0.45fr);
     }
 
     span {

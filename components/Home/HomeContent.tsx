@@ -9,16 +9,16 @@ import context from "../../context/context";
 import { useContext, useEffect, useMemo } from "react";
 
 interface props {
-  allCountriesData: countriesDataType[];
+  HomeCountriesData: countriesDataType[];
 }
 function HomeContent(props: props) {
   const contextState = useContext(context);
   const { state } = contextState as contextType;
-  const { allCountriesData } = props;
+  const { HomeCountriesData } = props;
   let CountriesDisplayedAtHomePage =
     state.countriesByRegion.length > 2
       ? state.countriesByRegion
-      : allCountriesData;
+      : HomeCountriesData;
   let numOfCountriesToDisplay = state.countriesByRegion.length > 2 ? 60 : 8;
   const result = useMemo(
     () =>

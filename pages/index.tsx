@@ -6,10 +6,10 @@ import { countriesDataType } from "../utilits/types";
 import Head from "next/head";
 
 interface props {
-  allCountriesData: countriesDataType[];
+  HomeCountriesData: countriesDataType[];
 }
 function Home(props: props) {
-  const { allCountriesData } = props;
+  const { HomeCountriesData } = props;
 
   return (
     <div className={styles.Home}>
@@ -21,7 +21,7 @@ function Home(props: props) {
         />
       </Head>
       <Search />
-      <HomeContent allCountriesData={allCountriesData} />
+      <HomeContent HomeCountriesData={HomeCountriesData} />
     </div>
   );
 }
@@ -31,7 +31,7 @@ export async function getStaticProps() {
 
   return {
     props: {
-      allCountriesData: data.data,
+      HomeCountriesData: data.data.slice(0, 12),
     },
   };
 }

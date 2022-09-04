@@ -33,7 +33,15 @@ function CountryDetails(props: props) {
       state.game.targetCountry.name.common === data[0].name.common
     ) {
       dispatch({ type: actionTypes.CHANGE_DONE_SUCCESSFULLY, value: true });
+      for (let i = 0; i < 100; i++) {
+        window.clearInterval(i);
+      }
       router.push("/game");
+    } else if (state.game.isActive && !state.game.Sucess) {
+      dispatch({
+        type: actionTypes.CHANGE_COUNTRIES_USER_WENT_THROUGHT,
+        value: data[0].name.common,
+      });
     }
   }, [data, dispatch]);
   useEffect(() => {
@@ -95,6 +103,20 @@ function CountryDetails(props: props) {
           <title>{common}</title>
         </Head>
         <div className={styles.CountryDetails__back}>
+          <button
+            onClick={() => {
+              dispatch({
+                type: actionTypes.CHANGE_DONE_SUCCESSFULLY,
+                value: true,
+              });
+              for (let i = 0; i < 100; i++) {
+                window.clearInterval(i);
+              }
+              router.push("/game");
+            }}
+          >
+            Make me win
+          </button>
           <button
             onClick={() => {
               router.push("/");
