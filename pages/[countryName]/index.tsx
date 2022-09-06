@@ -59,7 +59,6 @@ function CountryDetails(props: props) {
   }, [data]);
 
   if (data === null) {
-    console.log("no data");
     return (
       <div className={styles.CountryDetails__error}>
         <h3>No data Available for this Country</h3>
