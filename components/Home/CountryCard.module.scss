@@ -5,6 +5,10 @@
   border-radius: 5px;
   cursor: pointer;
   background-color: var(--element-color);
+  transition: all 0.7s;
+  &:hover{
+    transform: translateY(-10px);
+  }
   img {
     border-radius: 5px 5px 0 0;
   }
