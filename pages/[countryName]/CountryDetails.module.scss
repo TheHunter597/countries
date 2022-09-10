@@ -37,7 +37,7 @@
       background-color: var(--element-color);
       color: var(--primary-text-color);
       border: none;
-      padding: 0.8rem 3.5rem;
+      padding: 0.6rem 3.5rem;
       box-shadow: 10px 10px 20px rgba(black, 0.2);
       border-radius: 8px;
       cursor: pointer;
@@ -58,16 +58,17 @@
       grid-area: target;
       width: 100%;
       margin-top: 7.5rem;
+      font-size: 1.8rem;
       text-align: center;
     }
     h4 {
-      font-size: 2.5rem;
+      font-size: 2.5rem !important;
       background-color: $primary-red;
       padding: 0.6rem 2rem;
       border-radius: 10px;
       color: var(--primary-text-color);
       @media (max-width: 800px) {
-        font-size: 1.6rem;
+        font-size: 1.6rem !important;
         padding: 1rem 2rem;
       }
     }
@@ -126,6 +127,10 @@
     @media (max-width: 700px) {
       margin-left: 0;
     }
+    @media (max-width: 350px) {
+      margin-inline: auto;
+      grid-template-columns: repeat(2, 0.45fr);
+    }
 
     span {
       @include makeACard;
@@ -135,6 +140,18 @@
       @media (max-width: 700px) {
         padding: 0.4rem 2rem;
       }
+    }
+  }
+  &__error {
+    margin-inline: auto;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    h3 {
+      font-size: 4rem;
+      text-align: center;
     }
   }
 }

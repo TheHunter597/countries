@@ -1,6 +1,5 @@
-import { stat } from "fs";
 import { useRouter } from "next/router";
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer } from "react";
 
 import {
   state,
@@ -42,6 +41,22 @@ function reducer(state: state, action: action): state {
         ...state,
         game: { ...state.game, timeTaken: state.game.timeTaken + 1 },
       };
+    case actionTypes.CHANGE_COUNTRIES_USER_WENT_THROUGHT:
+      return {
+        ...state,
+        game: {
+          ...state.game,
+          countriesUserWentThrought: [
+            ...state.game.countriesUserWentThrought,
+            value,
+          ],
+        },
+      };
+    case actionTypes.REST_COUNTRIES_USER_WENT_THROUGHT:
+      return {
+        ...state,
+        game: { ...state.game, countriesUserWentThrought: [] },
+      };
     case actionTypes.REST_TIME_TAKEN:
       return { ...state, game: { ...state.game, timeTaken: 0 } };
     default:
@@ -61,10 +76,12 @@ export function ContextProvider(props: props) {
       startCountry: {} as countriesDataType,
       targetCountry: {} as countriesDataType,
       timeTaken: 0,
+      countriesUserWentThrought: [],
       Sucess: false,
     },
   };
   const [state, dispatch] = useReducer(reducer, initialState);
+  console.log(state);
 
   const router = useRouter();
   function changeCurrentCountry(country: countriesDataType) {
@@ -75,12 +92,41 @@ export function ContextProvider(props: props) {
     });
   }
 
+  function resetGame() {
+    dispatch({
+      type: actionTypes.CHANGE_GAME_REGION_COUNTRIES,
+      value: [],
+    });
+    dispatch({
+      type: actionTypes.CHANGE_START_COUNTRY,
+      value: {},
+    });
+    dispatch({
+      type: actionTypes.CHANGE_TARGET_COUNTRY,
+      value: {},
+    });
+    dispatch({ type: actionTypes.CHANGE_DONE_SUCCESSFULLY, value: false });
+    dispatch({ type: actionTypes.CHANGE_ACTIVE_GAME, value: false });
+  }
+
+  useEffect(() => {
+    let timer: any;
+    if (state.game.isActive && !state.game.Sucess && window) {
+      setTimeout(() => {
+        timer = window.setInterval(() => {
+          dispatch({ type: actionTypes.CHANGE_TIME_TAKEN });
+        }, 1000);
+      }, 10000);
+    }
+  }, [state.game.isActive, state.game.Sucess]);
+
   return (
     <context.Provider
       value={{
         state,
         dispatch,
         changeCurrentCountry,
+        resetGame,
       }}
     >
       {props.children}

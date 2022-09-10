@@ -22,6 +22,7 @@ export interface state {
     startCountry: countriesDataType;
     targetCountry: countriesDataType;
     timeTaken: number;
+    countriesUserWentThrought: string[];
     Sucess: boolean;
   };
 }
@@ -36,6 +37,8 @@ export enum actionTypes {
   CHANGE_TARGET_COUNTRY = "CHANGE_TARGET_COUNTRY",
   CHANGE_DONE_SUCCESSFULLY = "CHANGE_DONE_SUCCESSFULLY",
   CHANGE_TIME_TAKEN = "CHANGE_TIME_TAKEN",
+  CHANGE_COUNTRIES_USER_WENT_THROUGHT = "CHANGE_COUNTRIES_USER_WENT_THROUGHT",
+  REST_COUNTRIES_USER_WENT_THROUGHT = "REST_COUNTRIES_USER_WENT_THROUGHT",
   REST_TIME_TAKEN = "REST_TIME_TAKEN",
 }
 
@@ -49,4 +52,5 @@ export interface contextType {
   dispatch: ({ type, value }: { type: actionTypes; value?: any }) => void;
   changeCurrentCountry: (country: countriesDataType) => void;
   controlTimeTakenCounting: () => void;
+  resetGame: () => void;
 }
