@@ -104,6 +104,20 @@ function CountryDetails(props: props) {
         <div className={styles.CountryDetails__back}>
           <button
             onClick={() => {
+              dispatch({
+                type: actionTypes.CHANGE_DONE_SUCCESSFULLY,
+                value: true,
+              });
+              for (let i = 0; i < 100; i++) {
+                window.clearInterval(i);
+              }
+              router.push("/game");
+            }}
+          >
+            Make me win
+          </button>
+          <button
+            onClick={() => {
               router.push("/");
               resetGame();
             }}
