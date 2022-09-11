@@ -14,7 +14,7 @@ import GameMain from "../../components/Game/GameMain";
 import GameSucess from "../../components/Game/GameSucess";
 function Game() {
   const contextState = useContext(context);
-  const { state, dispatch } = contextState as contextType;
+  const { state, dispatch, resetGame } = contextState as contextType;
   const router = useRouter();
   const [timeToStart, setTimeToStart] = useState(10);
   async function startGame() {
@@ -73,7 +73,14 @@ function Game() {
         <title>Play A Game</title>
       </Head>
       <div className={styles.Game__back}>
-        <button onClick={() => router.push("/")}>Back</button>
+        <button
+          onClick={() => {
+            router.push("/");
+            resetGame();
+          }}
+        >
+          Back
+        </button>
       </div>
       {!state.game.Sucess ? (
         <GameMain startGame={startGame} timeToStart={timeToStart} />

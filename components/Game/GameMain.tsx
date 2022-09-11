@@ -30,8 +30,8 @@ function GameMain(props: props) {
         {!state.game.isActive ? (
           <Image
             src={countrtBorderImage}
-            width={1000}
-            height={550}
+            width={900}
+            height={450}
             alt="clarification Image"
           />
         ) : (
