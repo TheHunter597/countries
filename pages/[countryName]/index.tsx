@@ -77,7 +77,6 @@ function CountryDetails(props: props) {
       flags: { png },
       languages,
     } = data[0];
-    data[0] === undefined ? console.log("unde") : "here";
 
     let Allcurrencies: any = data != null ? Object.values(currencies) : "";
     let AllLanguages: any = data != null ? Object.values(languages) : "";
@@ -210,16 +209,12 @@ export async function getStaticProps(context: {
       (name) => name.toLocaleLowerCase() === context.params.countryName
     )
   ) {
-    console.log("meh");
-
     return {
       props: {
         data: null,
       },
     };
   } else {
-    console.log("done");
-
     const data = await fetchChosenCountryData(
       context.params.countryName.toLocaleLowerCase()
     );

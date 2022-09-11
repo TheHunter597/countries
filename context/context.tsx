@@ -81,7 +81,6 @@ export function ContextProvider(props: props) {
     },
   };
   const [state, dispatch] = useReducer(reducer, initialState);
-  console.log(state);
 
   const router = useRouter();
   function changeCurrentCountry(country: countriesDataType) {
