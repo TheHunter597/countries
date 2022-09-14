@@ -81,14 +81,10 @@ function Search() {
           onChange={debounce(SearchByName, 500)}
         ></input>
         {countriesData.length >= 1 ? (
-          <div className={styles.Search__results}>
-            {countriesData.length == 1 &&
-            input.current &&
-            input.current.value.length > 2 ? (
-              dropdownElements
-            ) : (
-              <div>No result found</div>
-            )}
+          <div className={styles.Search__results}>{dropdownElements}</div>
+        ) : (
+          ""
+        )}
           </div>
         ) : (
           ""
