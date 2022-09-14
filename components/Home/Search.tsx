@@ -61,7 +61,7 @@ function Search() {
           input.current?.focus();
         }}
       >
-        <span aria-label="button">
+        <span>
           <AiOutlineSearch />
         </span>
         <input
@@ -81,15 +81,14 @@ function Search() {
         onClick={() => router.push("/game")}
         role="button"
       >
-        <h3>Play a Game</h3>
+        <h2>Play a Game</h2>
       </div>
       <div
         aria-controls="regions"
-        aria-expanded="false"
         className={styles.Search__select}
         onClick={() => setShowOptions((prev) => !prev)}
       >
-        <span aria-selected="true">
+        <span>
           {state.currentChosenRegion && state.currentChosenRegion.length >= 3
             ? state.currentChosenRegion
             : "Filter by Region"}
