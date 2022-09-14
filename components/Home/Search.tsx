@@ -61,7 +61,7 @@ function Search() {
           input.current?.focus();
         }}
       >
-        <span role="button">
+        <span>
           <AiOutlineSearch />
         </span>
         <input
