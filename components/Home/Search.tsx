@@ -54,17 +54,19 @@ function Search() {
     );
   });
   return (
-    <div className={styles.Search}>
+    <div className={styles.Search} role="search">
       <div
         className={styles.Search__input}
         onClick={() => {
           input.current?.focus();
         }}
+        aria-label="Search"
       >
-        <span>
+        <span aria-label="Search logo">
           <AiOutlineSearch />
         </span>
         <input
+          aria-label="Search input"
           placeholder="Search for a country"
           ref={input}
           onChange={debounce(SearchByName, 500)}
@@ -75,14 +77,19 @@ function Search() {
           ""
         )}
       </div>
-      <div className={styles.Search__game} onClick={() => router.push("/game")}>
+      <div
+        className={styles.Search__game}
+        onClick={() => router.push("/game")}
+        role="Game"
+        aria-label="Play a game"
+      >
         <h4>Play a Game</h4>
       </div>
       <div
         className={styles.Search__select}
         onClick={() => setShowOptions((prev) => !prev)}
       >
-        <span>
+        <span aria-label="filter by region">
           {state.currentChosenRegion && state.currentChosenRegion.length >= 3
             ? state.currentChosenRegion
             : "Filter by Region"}

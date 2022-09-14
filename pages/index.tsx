@@ -12,17 +12,14 @@ function Home(props: props) {
   const { HomeCountriesData } = props;
 
   return (
-    <div className={styles.Home}>
+    <main className={styles.Home}>
       <Head>
         <title>Where in the world</title>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1, user-scalable=no"
-        />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
       <Search />
       <HomeContent HomeCountriesData={HomeCountriesData} />
-    </div>
+    </main>
   );
 }
 
