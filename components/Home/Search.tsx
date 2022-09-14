@@ -76,11 +76,7 @@ function Search() {
           ""
         )}
       </div>
-      <div
-        className={styles.Search__game}
-        onClick={() => router.push("/game")}
-        role="button"
-      >
+      <div className={styles.Search__game} onClick={() => router.push("/game")}>
         <h2>Play a Game</h2>
       </div>
       <div
@@ -93,7 +89,13 @@ function Search() {
             : "Filter by Region"}
         </span>
         <span>
-          <Image src={downArrow} alt="logo" height={12} width={10} />
+          <Image
+            src={downArrow}
+            alt="logo"
+            height={12}
+            width={10}
+            loading="eager"
+          />
         </span>
         {showOptions ? (
           <div className={styles.Search__options} id="regions" role="menu">
