@@ -23,11 +23,17 @@ function CountryCard(props: props) {
     flags: { png },
   } = data;
   return (
-    <div
+    <article
       className={styles.CountryCard}
       onClick={() => router.push(`/${common.toLocaleLowerCase()}`)}
     >
-      <Image loading="eager" src={png} width={350} height={220} alt="Flag" />
+      <Image
+        loading="eager"
+        src={png}
+        width={350}
+        height={220}
+        alt={`${data.name.common} flag`}
+      />
       <div className={styles.CountryCard__info}>
         <h3>{common}</h3>
         <span>
@@ -40,7 +46,7 @@ function CountryCard(props: props) {
           Capital: <span>{capital}</span>{" "}
         </span>
       </div>
-    </div>
+    </article>
   );
 }
 

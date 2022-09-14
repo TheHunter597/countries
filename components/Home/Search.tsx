@@ -41,16 +41,26 @@ function Search() {
 
   const dropdownElements = countriesData.slice(0, 15).map((country) => {
     return (
-      <span
+      <div
         key={country.population}
         onClick={() => {
           changeCurrentCountry(country);
           router.push(`/${country.name.common.toLocaleLowerCase()}`);
         }}
       >
-        <Image src={country.flags.png} width={60} height={40} alt="flag" />
-        {country.name.common}
-      </span>
+        <Image
+          src={country.flags.png}
+          width={60}
+          height={40}
+          alt={`${country.name.common} flag`}
+          key={country.population}
+          onClick={() => {
+            changeCurrentCountry(country);
+            router.push(`/${country.name.common.toLocaleLowerCase()}`);
+          }}
+        />
+        <h4>{country.name.common}</h4>
+      </div>
     );
   });
   return (
@@ -71,7 +81,15 @@ function Search() {
           onChange={debounce(SearchByName, 500)}
         ></input>
         {countriesData.length >= 1 ? (
-          <div className={styles.Search__results}>{dropdownElements}</div>
+          <div className={styles.Search__results}>
+            {countriesData.length == 1 &&
+            input.current &&
+            input.current.value.length > 2 ? (
+              <div>No result found</div>
+            ) : (
+              dropdownElements
+            )}
+          </div>
         ) : (
           ""
         )}
