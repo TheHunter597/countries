@@ -85,17 +85,16 @@ function Search() {
       </div>
       <div
         aria-controls="regions"
-        aria-expanded="false"
         className={styles.Search__select}
         onClick={() => setShowOptions((prev) => !prev)}
       >
-        <span aria-selected="true">
+        <span>
           {state.currentChosenRegion && state.currentChosenRegion.length >= 3
             ? state.currentChosenRegion
             : "Filter by Region"}
         </span>
         <span>
-          <Image src={downArrow} alt="ds" height={12} width={10} />
+          <Image src={downArrow} alt="logo" height={12} width={10} />
         </span>
         {showOptions ? (
           <div className={styles.Search__options} id="regions" role="menu">
