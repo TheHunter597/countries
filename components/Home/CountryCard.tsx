@@ -24,10 +24,17 @@ function CountryCard(props: props) {
   } = data;
   return (
     <div
+      aria-label="Country info"
       className={styles.CountryCard}
       onClick={() => router.push(`/${common.toLocaleLowerCase()}`)}
     >
-      <Image src={png} width={350} height={220} alt="Flag" />
+      <Image
+        src={png}
+        width={350}
+        height={220}
+        alt="Flag"
+        aria-label="Country flag"
+      />
       <div className={styles.CountryCard__info}>
         <h3>{common}</h3>
         <span>

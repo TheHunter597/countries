@@ -29,7 +29,11 @@ function HomeContent(props: props) {
       ),
     [CountriesDisplayedAtHomePage, numOfCountriesToDisplay]
   );
-  return <div className={styles.HomeContent}>{result}</div>;
+  return (
+    <section className={styles.HomeContent} role="contentinfo">
+      {result}
+    </section>
+  );
 }
 
 export default HomeContent;

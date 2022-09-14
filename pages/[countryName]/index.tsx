@@ -96,7 +96,7 @@ function CountryDetails(props: props) {
     });
 
     return (
-      <div className={styles.CountryDetails}>
+      <section className={styles.CountryDetails}>
         <Head>
           <title>{common}</title>
         </Head>
@@ -167,7 +167,7 @@ function CountryDetails(props: props) {
           <h4>Border Countries: </h4>
           <div className={styles.CountryDetails__border}>{borderCountries}</div>
         </div>
-      </div>
+      </section>
     );
   }
 }
