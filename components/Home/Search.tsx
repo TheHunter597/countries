@@ -82,13 +82,6 @@ function Search() {
         ></input>
         {countriesData.length >= 1 ? (
           <div className={styles.Search__results}>{dropdownElements}</div>
-<<<<<<< HEAD
-=======
-        ) : (
-          ""
-        )}
-          </div>
->>>>>>> 6b09c22e55c2622187b7f244a379f1d3506056a7
         ) : (
           ""
         )}
