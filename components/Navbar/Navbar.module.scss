@@ -5,9 +5,18 @@
   height: 8rem;
   background-color: var(--element-color);
   transition: all 0.7s;
-  ul {
+  &__content {
+    display: flex;
     width: min(95%, 1440px);
     margin-inline: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    h1 {
+      font-size: 2.4rem;
+    }
+  }
+  ul {
     display: flex;
     flex-direction: row;
     margin-top: 0;
@@ -19,9 +28,6 @@
     color: var(--primary-text-color);
     margin-bottom: 0;
     height: 100%;
-    h1 {
-      font-size: 2.4rem;
-    }
     li {
       &:first-child {
         font-weight: 800;
