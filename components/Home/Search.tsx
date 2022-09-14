@@ -54,19 +54,18 @@ function Search() {
     );
   });
   return (
-    <div className={styles.Search} role="search">
+    <div className={styles.Search}>
       <div
         className={styles.Search__input}
         onClick={() => {
           input.current?.focus();
         }}
-        aria-label="Search"
       >
-        <span aria-label="Search logo">
+        <span aria-label="button">
           <AiOutlineSearch />
         </span>
         <input
-          aria-label="Search input"
+          aria-label="Search"
           placeholder="Search for a country"
           ref={input}
           onChange={debounce(SearchByName, 500)}
@@ -80,16 +79,17 @@ function Search() {
       <div
         className={styles.Search__game}
         onClick={() => router.push("/game")}
-        role="Game"
-        aria-label="Play a game"
+        role="button"
       >
-        <h4>Play a Game</h4>
+        <h3>Play a Game</h3>
       </div>
       <div
+        aria-controls="regions"
+        aria-expanded="false"
         className={styles.Search__select}
         onClick={() => setShowOptions((prev) => !prev)}
       >
-        <span aria-label="filter by region">
+        <span aria-selected="true">
           {state.currentChosenRegion && state.currentChosenRegion.length >= 3
             ? state.currentChosenRegion
             : "Filter by Region"}
@@ -98,10 +98,14 @@ function Search() {
           <Image src={downArrow} alt="ds" height={12} width={10} />
         </span>
         {showOptions ? (
-          <div className={styles.Search__options}>
+          <div className={styles.Search__options} id="regions" role="menu">
             {state.regions.map((region) => {
               return (
-                <span key={region} onClick={() => getCountriesByRegion(region)}>
+                <span
+                  key={region}
+                  onClick={() => getCountriesByRegion(region)}
+                  role="menuitem"
+                >
                   {region}
                 </span>
               );
