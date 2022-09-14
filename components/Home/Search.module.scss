@@ -133,7 +133,6 @@
   }
   &__game {
     background-color: var(--element-color) !important;
-    font-size: $fs-body;
     padding: 0rem 3rem;
     text-align: center;
     margin-inline: auto;
@@ -145,7 +144,11 @@
     @media (max-width: 600px) {
       grid-area: game;
       width: 85%;
-      padding: 0.15rem 1.5rem;
+      padding: 0.25rem 1.5rem;
+    }
+    h2 {
+      font-size: 1.8rem;
+      font-weight: 600;
     }
     &:hover {
       transform: translateY(-10px);
