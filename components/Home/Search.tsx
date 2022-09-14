@@ -85,9 +85,9 @@ function Search() {
             {countriesData.length == 1 &&
             input.current &&
             input.current.value.length > 2 ? (
-              <div>No result found</div>
-            ) : (
               dropdownElements
+            ) : (
+              <div>No result found</div>
             )}
           </div>
         ) : (
